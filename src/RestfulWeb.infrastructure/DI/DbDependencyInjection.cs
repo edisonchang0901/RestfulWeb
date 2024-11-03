@@ -3,12 +3,13 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using RestfulWeb.Domain.Profiles;
 using RestfulWeb.infrastructure.Models;
+using Serilog;
 
 namespace RestfulWeb.infrastructure.DI
 {
     public static partial class DependencyInjection
     {
-        public static IServiceCollection AddDbAccountMainContext(this IServiceCollection services) 
+        public static IServiceCollection AddDbAccountMainContext(this IServiceCollection services)
         {
             services.AddPooledDbContextFactory<AccountMainContext>(options =>
             {
@@ -19,11 +20,11 @@ namespace RestfulWeb.infrastructure.DI
             return services;
         }
 
-        public static bool CheckAccountMainConnect(this IApplicationBuilder app) 
+        public static void CheckAccountMainConnect(this IApplicationBuilder app)
         {
             IDbContextFactory<AccountMainContext> factory = app.ApplicationServices.GetRequiredService<IDbContextFactory<AccountMainContext>>();
             AccountMainContext accountMainContext = factory.CreateDbContext();
-            return accountMainContext.Database.CanConnect();
+            Log.Logger.Information($"{nameof(AccountMainContext)}連線{(accountMainContext.Database.CanConnect() ? "成功" : "失敗")}");
         }
     }
 }

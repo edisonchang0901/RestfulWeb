@@ -9,10 +9,6 @@ namespace RestfulWeb.infrastructure.Models
 {
     public partial class AccountMainContext : DbContext
     {
-        public AccountMainContext()
-        {
-        }
-
         public AccountMainContext(DbContextOptions<AccountMainContext> options)
             : base(options)
         {
@@ -38,12 +34,6 @@ namespace RestfulWeb.infrastructure.Models
 
                 entity.Property(e => e.CreateDatetime).HasColumnType("datetime");
 
-                entity.Property(e => e.CreateUserName)
-                    .IsRequired()
-                    .HasMaxLength(20);
-
-                entity.Property(e => e.LastChangePasswordDatetime).HasColumnType("datetime");
-
                 entity.Property(e => e.Password)
                     .IsRequired()
                     .HasMaxLength(100)
@@ -58,8 +48,6 @@ namespace RestfulWeb.infrastructure.Models
 
                 entity.Property(e => e.UpdateDatetime).HasColumnType("datetime");
 
-                entity.Property(e => e.UpdateUserName).HasMaxLength(20);
-
                 entity.Property(e => e.UserEmail)
                     .HasMaxLength(256)
                     .IsUnicode(false);
@@ -69,16 +57,6 @@ namespace RestfulWeb.infrastructure.Models
                     .HasMaxLength(20);
 
                 entity.Property(e => e.UserPhone)
-                    .HasMaxLength(10)
-                    .IsUnicode(false)
-                    .IsFixedLength();
-
-                entity.Property(e => e.UserTel)
-                    .HasMaxLength(10)
-                    .IsUnicode(false)
-                    .IsFixedLength();
-
-                entity.Property(e => e.UserTelExtension)
                     .HasMaxLength(10)
                     .IsUnicode(false)
                     .IsFixedLength();

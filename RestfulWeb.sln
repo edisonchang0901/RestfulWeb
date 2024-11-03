@@ -5,7 +5,7 @@ VisualStudioVersion = 17.8.34330.188
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RestfulWeb", "src\RestfulWeb\RestfulWeb.csproj", "{6072025F-079D-4B71-87B9-25A2207E90A2}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RestfulWeb.Api", "src\RestfulWeb.Api\RestfulWeb.Api.csproj", "{30AC8B37-C42D-4176-86BD-4FC2EA256A41}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RestfulWeb.Application", "src\RestfulWeb.Application\RestfulWeb.Application.csproj", "{30AC8B37-C42D-4176-86BD-4FC2EA256A41}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RestfulWeb.Domain", "src\RestfulWeb.Domain\RestfulWeb.Domain.csproj", "{F555267E-34CD-499B-AA5D-F707FE2A36B4}"
 EndProject
