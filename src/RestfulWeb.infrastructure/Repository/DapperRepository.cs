@@ -1,34 +1,42 @@
-﻿using RestfulWeb.Domain.Interfaces;
+﻿using Dapper;
+using RestfulWeb.Domain.Interfaces;
 using RestfulWeb.Domain.Models;
 
 namespace RestfulWeb.infrastructure.Repository
 {
     public class DapperRepository : IUserRepository
     {
+        private readonly IDbConnectionFactory _dbConnectionFactory;
+        public DapperRepository(IDbConnectionFactory dbConnectionFactory) 
+        {
+            _dbConnectionFactory = dbConnectionFactory;
+        }
         public string Name { get => nameof(DapperRepository); }
 
-        public Task CreateUser(User user)
+        public async Task CreateUser(User user)
         {
             throw new NotImplementedException();
         }
 
 
-        public Task DeleteUser(int id)
+        public async Task DeleteUser(int id)
         {
             throw new NotImplementedException();
         }
 
-        public Task<User> GetUser(int id)
+        public async Task<User> GetUser(int id)
         {
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<User>> GetUsers()
+        public async Task<IEnumerable<User>> GetUsers()
         {
-            throw new NotImplementedException();
+            using var connection = _dbConnectionFactory.CreateConnection();
+            string sql = "SELECT * FROM [AccountMain].[dbo].[User]";
+            return await connection.QueryAsync<User>(sql).ConfigureAwait(false);
         }
 
-        public Task UpdateUser(User user)
+        public async Task UpdateUser(User user)
         {
             throw new NotImplementedException();
         }

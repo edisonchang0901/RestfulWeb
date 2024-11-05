@@ -18,6 +18,7 @@ namespace RestfulWeb
                 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
                 builder.Services.AddProfilesBind(builder.Configuration);
                 builder.Services.AddDbAccountMainContext();
+                builder.Services.AddDapperDbFactoryc();
                 builder.Services.AddAppService();
                 builder.Services.AddAutoMapperSetup();
                 builder.Services.AddRepository();
