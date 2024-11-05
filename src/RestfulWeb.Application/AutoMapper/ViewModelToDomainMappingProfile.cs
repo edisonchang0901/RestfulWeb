@@ -8,7 +8,9 @@ namespace RestfulWeb.Application.AutoMapper
     {
         public ViewModelToDomainMappingProfile() 
         {
-            CreateMap<UserViewModel, User>();
+            CreateMap<UserViewModel, User>()
+                .ReverseMap();
+
         }
     }
 }

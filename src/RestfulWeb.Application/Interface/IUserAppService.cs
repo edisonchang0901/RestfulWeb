@@ -10,5 +10,11 @@ namespace RestfulWeb.Application.Interface
 
         public Task CreateUser(UserViewModel model);
 
+        public Task DenyUser(int id);
+
+        public Task UpdateUser(UserViewModel model);
+
+        public Task DeleteUser(int id);
+
     }
 }

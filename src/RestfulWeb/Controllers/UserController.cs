@@ -11,7 +11,7 @@ namespace RestfulWeb.Controllers
     public class UserController : ControllerBase
     {
         private readonly IUserAppService _userAppService;
-        public UserController(IUserAppService userAppService) 
+        public UserController(IUserAppService userAppService)
         {
             _userAppService = userAppService;
         }
@@ -19,7 +19,7 @@ namespace RestfulWeb.Controllers
         [HttpGet]
         [AllowAnonymous]
         [Route("user/{id:int}")]
-        public async Task<IActionResult> Get(int id) 
+        public async Task<IActionResult> Get(int id)
         {
             var userViewModel = await _userAppService.GetUserById(id);
             return Ok(userViewModel);
@@ -28,7 +28,7 @@ namespace RestfulWeb.Controllers
         [HttpGet]
         [AllowAnonymous]
         [Route("user")]
-        public async Task<IActionResult> Get() 
+        public async Task<IActionResult> Get()
         {
             var userViewModel = await _userAppService.GetUserAll();
             return Ok(userViewModel);
@@ -36,9 +36,9 @@ namespace RestfulWeb.Controllers
 
         [HttpPost]
         [Route("user")]
-        public async Task<IActionResult> Post([FromBody] UserViewModel model) 
+        public async Task<IActionResult> Post([FromBody] UserViewModel model)
         {
-            if (!ModelState.IsValid) 
+            if (!ModelState.IsValid)
             {
                 return BadRequest(new
                 {
@@ -50,7 +50,7 @@ namespace RestfulWeb.Controllers
         }
         [HttpPut]
         [Route("user")]
-        public IActionResult Put([FromBody] UserViewModel userViewModel) 
+        public async Task<IActionResult> Put([FromBody] UserViewModel userViewModel)
         {
             if (!ModelState.IsValid)
             {
@@ -59,14 +59,23 @@ namespace RestfulWeb.Controllers
                     Error = ModelState.Values.SelectMany(v => v.Errors).ToList()
                 });
             }
-            // To Do
+            await _userAppService.UpdateUser(userViewModel);
+            return Ok();
+        }
+
+        [HttpPost]
+        [Route("user/{id:int}")]
+        public async Task<IActionResult> Patch(int id)
+        {
+            await _userAppService.DenyUser(id);
             return Ok();
         }
 
         [HttpDelete]
         [Route("user/{id:int}")]
-        public IActionResult Delete(int id) 
+        public async Task<IActionResult> Delete(int id)
         {
+            await _userAppService.DeleteUser(id);
             return Ok();
         }
     }

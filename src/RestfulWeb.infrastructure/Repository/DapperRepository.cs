@@ -7,12 +7,13 @@ namespace RestfulWeb.infrastructure.Repository
     {
         public string Name { get => nameof(DapperRepository); }
 
-        public Task CreateUser()
+        public Task CreateUser(User user)
         {
             throw new NotImplementedException();
         }
 
-        public Task DeleteUser()
+
+        public Task DeleteUser(int id)
         {
             throw new NotImplementedException();
         }
@@ -27,7 +28,7 @@ namespace RestfulWeb.infrastructure.Repository
             throw new NotImplementedException();
         }
 
-        public Task UpdateUser()
+        public Task UpdateUser(User user)
         {
             throw new NotImplementedException();
         }

@@ -18,10 +18,12 @@ namespace RestfulWeb.Application.Services
         }
 
 
-        public Task CreateUser(UserViewModel model)
+        public async Task CreateUser(UserViewModel model)
         {
-            var result = _mapper.Map<User>(model);
-            throw new NotImplementedException();
+            User user = _mapper.Map<User>(model);
+            user.Register();
+            user.RecordCreateTime();
+            await _userRepository.CreateUser(user);
         }
 
         public async Task<UserViewModel> GetUserById(int id)
@@ -36,7 +38,27 @@ namespace RestfulWeb.Application.Services
 
         public async Task UpdateUser(UserViewModel model) 
         {
+            User user = _mapper.Map<User>(model);
+            user.RecordUpdateTime();
+            await _userRepository.UpdateUser(user);
+        }
 
+        public async Task DenyUser(int id) 
+        {
+            var user = await _userRepository.GetUser(id);
+            if (user == null)
+                throw new NullReferenceException($"{nameof(DenyUser)} can't find user { id }");         
+            user.Deny();
+            user.RecordUpdateTime();
+            await _userRepository.UpdateUser(user);
+        }
+
+        public async Task DeleteUser(int id) 
+        {
+            var user = await _userRepository.GetUser(id);
+            if (user == null)
+                throw new NullReferenceException($"{nameof(DeleteUser)} can't find user {id}");
+            await _userRepository.DeleteUser(id);
         }
     }
 }
